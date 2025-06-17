@@ -6,7 +6,7 @@
                 class="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end"
             >
                 <!-- Button Group (aligned in a row on large screens) -->
-                <div class="flex gap-3">
+                <div class="flex items-center justify-center gap-3">
                     <!-- Search  Field -->
                     <mat-form-field
                         class="w-full sm:w-72"
@@ -28,12 +28,24 @@
 
                     <!-- Refresh Button -->
                     <button mat-icon-button (click)="refresh()">
-                        <mat-icon class="icon-size-7">refresh</mat-icon>
+                        <!-- <mat-icon class="icon-size-7">refresh</mat-icon> -->
+                        <i
+                            class="fi fi-rr-refresh"
+                            [ngStyle]="{
+                                color: 'blue',
+                            }"
+                        ></i>
                     </button>
 
                     <!-- Cloumn filter-->
                     <button mat-icon-button (click)="cloumnshow()">
-                        <mat-icon>filter_alt</mat-icon>
+                        <!-- <mat-icon>filter_alt</mat-icon> -->
+                        <i
+                            class="fi fi-tr-filters"
+                            [ngStyle]="{
+                                color: 'blue',
+                            }"
+                        ></i>
                     </button>
 
                     <!-- Filter Button -->
@@ -43,7 +55,8 @@
 
                     <!-- Add Doctor Button -->
                     <button mat-icon-button (click)="addpatientdialog()">
-                        <mat-icon class="icon-size-7">control_point</mat-icon>
+                        <!-- <mat-icon class="icon-size-7">control_point</mat-icon> -->
+                        <i class="fi fi-ss-add"></i>
                     </button>
                 </div>
             </div>
@@ -82,6 +95,8 @@
                                     class="align-middle px-2 py-2 text-center"
                                     [ngClass]="{
                                         'flex items-center justify-center gap-2 bg-white':
+                                            column.name === 'actions',
+                                        'border-l border-gray-300':
                                             column.name === 'actions',
                                     }"
                                 >
@@ -234,17 +249,21 @@
                                             >
                                                 <button
                                                     mat-icon-button
-                                                    color="primary"
                                                     (click)="saveRow(element)"
                                                 >
-                                                    <mat-icon>save</mat-icon>
+                                                    <!-- <mat-icon>save</mat-icon> -->
+                                                    <i
+                                                        class="fi fi-tr-floppy-disks"
+                                                    ></i>
                                                 </button>
                                                 <button
                                                     mat-icon-button
-                                                    color="warn"
                                                     (click)="cancelEdit()"
                                                 >
-                                                    <mat-icon>close</mat-icon>
+                                                    <!-- <mat-icon>close</mat-icon> -->
+                                                    <i
+                                                        class="fi fi-tr-circle-xmark"
+                                                    ></i>
                                                 </button>
                                             </ng-container>
                                             <ng-template #actionButtons>
@@ -253,16 +272,18 @@
                                                     mat-icon-button
                                                     matTooltip="Login"
                                                 >
-                                                    <img
+                                                    <!-- <img
                                                         class="h-6 w-6"
                                                         src="images/logo/login.svg"
-                                                    />
+                                                    /> -->
+                                                    <i
+                                                        class="fi fi-tr-entrance"
+                                                    ></i>
                                                 </button>
 
                                                 <!-- Edit -->
                                                 <button
                                                     mat-icon-button
-                                                    color="primary"
                                                     matTooltip="Edit"
                                                     (click)="
                                                         editRow(
@@ -270,23 +291,41 @@
                                                         )
                                                     "
                                                 >
-                                                    <mat-icon>edit</mat-icon>
+                                                    <!-- <mat-icon>edit</mat-icon> -->
+                                                    <i
+                                                        class="fi fi-tr-text-box-edit"
+                                                    ></i>
                                                 </button>
 
-                                                <!-- Delete -->
                                                 <button
                                                     mat-icon-button
-                                                    color="warn"
                                                     matTooltip="Delete"
                                                     (click)="deletebtn(element)"
                                                 >
-                                                    <mat-icon>delete</mat-icon>
+                                                    <i
+                                                        class="fi fi-rs-trash"
+                                                        [ngStyle]="{
+                                                            color:
+                                                                selectedRow?.user_row_id ===
+                                                                    element.user_row_id &&
+                                                                selectedAction ===
+                                                                    'delete'
+                                                                    ? 'red'
+                                                                    : visitedActions[
+                                                                            element
+                                                                                .user_row_id
+                                                                        ]?.includes(
+                                                                            'delete'
+                                                                        )
+                                                                      ? 'yellow'
+                                                                      : 'blue',
+                                                        }"
+                                                    ></i>
                                                 </button>
 
                                                 <!-- View -->
                                                 <button
                                                     mat-icon-button
-                                                    color="primary"
                                                     matTooltip="View Details"
                                                     (click)="
                                                         viewpatientDetails(
@@ -294,23 +333,31 @@
                                                         )
                                                     "
                                                 >
-                                                    <mat-icon
+                                                    <!-- <mat-icon
                                                         >visibility</mat-icon
-                                                    >
+                                                    > -->
+                                                    <i
+                                                        class="fi fi-tr-overview"
+                                                        [ngStyle]="{
+                                                            color: 'green',
+                                                        }"
+                                                    ></i>
                                                 </button>
 
                                                 <!-- Suspend -->
                                                 <button
                                                     mat-icon-button
-                                                    color="warn"
                                                     matTooltip="Suspend Patient"
                                                     (click)="
                                                         suspendPatient(element)
                                                     "
                                                 >
-                                                    <mat-icon
+                                                    <!-- <mat-icon
                                                         >pause_presentation</mat-icon
-                                                    >
+                                                    > -->
+                                                    <i
+                                                        class="fi fi-ts-dot-circle"
+                                                    ></i>
                                                 </button>
 
                                                 <!-- Lock -->
@@ -318,7 +365,10 @@
                                                     mat-icon-button
                                                     matTooltip="Lock Account"
                                                 >
-                                                    <mat-icon>lock</mat-icon>
+                                                    <!-- <mat-icon>lock</mat-icon> -->
+                                                    <i
+                                                        class="fi fi-tr-password-lock"
+                                                    ></i>
                                                 </button>
                                             </ng-template>
                                         </ng-container>
@@ -366,7 +416,6 @@
 
 
 
-
 import { Component, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -381,11 +430,11 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DeldialogComponent } from '../../dialog/deldialog/deldialog.component';
 import { AddpatientdialogComponent } from '../../dialog/doctor/addpatientdialog/addpatientdialog.component';
 import { CloumnShowdialogComponent } from '../../dialog/doctor/cloumn-showdialog/cloumn-showdialog.component';
 import { SuspendPatientComponent } from '../../dialog/suspend-patient/suspend-patient.component';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 interface Patient {
     patient_age: string;
@@ -418,7 +467,8 @@ interface Column {
         MatPaginatorModule,
         CommonModule,
         FormsModule,
-        MatSortModule,MatTooltipModule
+        MatSortModule,
+        MatTooltipModule,
     ],
     templateUrl: './viewpatients.component.html',
     styleUrl: './viewpatients.component.css',
@@ -504,11 +554,30 @@ export class ViewpatientsComponent {
         });
     }
 
-    deletebtn(patient: Patient) {
-        this._matDialog.open(DeldialogComponent, {
-            data: { patient: patient },
-        });
-    }
+    selectedRow: any = null;
+selectedAction: string = '';
+visitedActions: { [key: string]: string[] } = {};
+
+deletebtn(row: any): void {
+  this.selectedRow = row;
+  this.selectedAction = 'delete';
+
+  const id = row.user_row_id;
+
+  if (!this.visitedActions[id]) {
+    this.visitedActions[id] = [];
+  }
+
+  if (!this.visitedActions[id].includes('delete')) {
+    this.visitedActions[id].push('delete');
+  }
+
+  this._matDialog.open(DeldialogComponent, {
+    data: { patient: row },
+  });
+}
+
+    
 
     viewpatientDetails(patient_rowId: string) {
         this.router.navigate(['patientpanel', patient_rowId]);
@@ -525,7 +594,7 @@ export class ViewpatientsComponent {
         });
 
         dialogRef.afterClosed().subscribe((result: Column[] | undefined) => {
-          console.log("res",result)
+            console.log('res', result);
             if (result) {
                 // Update visibility based on dialog result
                 result.forEach((colFromDialog) => {
@@ -578,79 +647,21 @@ export class ViewpatientsComponent {
 
 
 
-
-async function changePassword(req, res) {
-  try {
-    const { row_id, currentPassword, newPassword } = req.body;
-
-    if (!row_id || !currentPassword || !newPassword) {
-      return res.send(
-        encodeRespData({
-          msg: "All fields are required",
-          status: 1,
-        })
-      );
-    }
-
-    // Step 1: Fetch user with matching current password
-    const columns = ["row_id", "user_password"];
-    const clause = `row_id = '${row_id}' AND user_password = '${currentPassword}' AND deleted = 0 AND active = 0`;
-    const userResp = await queries.selectQuery(usersTable, columns, clause);
-
-    if (!userResp || userResp.length === 0) {
-      return res.send(
-        encodeRespData({
-          msg: "Current password is incorrect",
-          status: 1,
-        })
-      );
-    }
-
-    // Step 2: Update to new password
-    const updateData = { user_password: newPassword };
-    const updateClause = `row_id = '${row_id}'`;
-    const updateResp = await queries.updateQuery(usersTable, updateData, updateClause);
-
-    if (updateResp.rowCount > 0 || updateResp.affectedRows > 0) {
-      return res.send(
-        encodeRespData({
-          msg: "Password changed successfully",
-          status: 0,
-        })
-      );
-    } else {
-      return res.send(
-        encodeRespData({
-          msg: "Failed to update password",
-          status: 2,
-        })
-      );
-    }
-  } catch (error) {
-    console.error("Change password error:", error);
-    return res.send(
-      encodeRespData({
-        msg: "Something went wrong",
-        status: 2,
-      })
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
+        />
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-straight/css/uicons-thin-straight.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+        <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    </head>
